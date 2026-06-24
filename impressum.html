@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum – CallConnect AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #00d632;
+  --green-dark: #00a828;
+  --gray-bg: #f4f4f5;
+  --white: #ffffff;
+  --border: #e4e4e7;
+  --text: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { background: var(--gray-bg); }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--gray-bg); color: var(--text);
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+  padding: 16px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--gray-bg);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.35s ease;
+}
+/* nav bleibt immer sichtbar */
+
+.nav-logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+  color: var(--text); text-decoration: none;
+}
+.nav-logo span { color: var(--green); }
+
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 14px; font-weight: 500; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* Burger */
+.nav-burger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; z-index: 101;
+}
+.nav-burger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--text); border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(244,244,245,0.97);
+  backdrop-filter: blur(20px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.mobile-menu.open {
+  opacity: 1; pointer-events: auto;
+}
+.mobile-menu-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+}
+.mobile-menu-inner a {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 600; color: var(--text);
+  text-decoration: none; letter-spacing: -0.5px;
+  transition: color 0.2s;
+}
+.mobile-menu-inner a:hover { color: var(--green); }
+
+/* Content */
+.content {
+  max-width: 720px; margin: 0 auto; padding: 140px 40px 80px;
+}
+
+.content h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(36px, 5vw, 52px); font-weight: 800;
+  margin-bottom: 40px; letter-spacing: -1px;
+}
+
+.content h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 22px; font-weight: 700; margin: 40px 0 16px;
+  color: var(--green);
+}
+
+.content p {
+  font-size: 15px; color: var(--text-secondary);
+  margin-bottom: 16px; line-height: 1.8;
+}
+
+.content a { color: var(--green); text-decoration: underline; }
+
+.content ul { margin: 0 0 16px 20px; color: var(--text-secondary); }
+.content ul li { margin-bottom: 8px; }
+
+.content hr {
+  border: none; border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+footer {
+  padding: 40px; text-align: center;
+  border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--text-muted);
+}
+
+footer a {
+  color: var(--green); text-decoration: none; margin: 0 8px;
+}
+
+@media (max-width: 600px) {
+  nav {
+    padding: 12px 20px;
+    padding-top: max(12px, env(safe-area-inset-top));
+    background: var(--gray-bg);
+  }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .content { padding: 120px 20px 60px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo"><a href="/" style="text-decoration:none;color:inherit">CallConnect <span>AI</span></a></div>
+    <div class="nav-links">
+    <a href="index.html">Startseite</a>
+    <a href="preise.html">Preise</a>
+    <a href="datenschutz.html">Datenschutz</a>
+  </div>
+  <button class="nav-burger" aria-label="Menü öffnen" id="burgerBtn">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <a href="index.html">Startseite</a>
+    <a href="preise.html">Preise</a>
+    <a href="datenschutz.html">Datenschutz</a>
+  </div>
+</div>
+
+<div class="content">
+  <h1>Impressum</h1>
+
+  <h2>Angaben gem&auml;&szlig; &sect; 5 TMG</h2>
+  <p>
+    <strong>CB PHOTO &amp; AI Solutions</strong><br>
+    Inhaber: Christoph Behrmann<br>
+    Rheindammstra&szlig;e 19<br>
+    68163 Mannheim
+  </p>
+  <p>
+    <strong>Marke:</strong> CallConnect AI<br>
+    <strong>E-Mail:</strong> <a href="mailto:info@callconnectai.de">info@callconnectai.de</a>
+  </p>
+
+  <hr>
+
+  <h2>Umsatzsteuer</h2>
+  <p>
+    Kleinunternehmer gem&auml;&szlig; &sect; 19 UStG.<br>
+    Umsatzsteuer-Identifikationsnummer wird auf Anfrage mitgeteilt.
+  </p>
+
+  <hr>
+
+  <h2>Verantwortlich f&uuml;r den Inhalt nach &sect; 55 Abs. 2 RStV</h2>
+  <p>
+    Christoph Behrmann<br>
+    Rheindammstra&szlig;e 19, 68163 Mannheim
+  </p>
+
+  <hr>
+
+  <h2>Streitschlichtung</h2>
+  <p>
+    Die Europ&auml;ische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+    <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a>
+  </p>
+  <p>
+    Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+  </p>
+
+  <hr>
+
+  <h2>Haftung f&uuml;r Inhalte</h2>
+  <p>
+    Die Inhalte unserer Seiten wurden mit gr&ouml;&szlig;ter Sorgfalt erstellt. F&uuml;r die Richtigkeit, Vollst&auml;ndigkeit und Aktualit&auml;t der Inhalte k&ouml;nnen wir jedoch keine Gew&auml;hr &uuml;bernehmen.
+  </p>
+
+  <h2>Haftung f&uuml;r Links</h2>
+  <p>
+    Unser Angebot enth&auml;lt Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. F&uuml;r die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
+  </p>
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">CallConnect AI</a> &bull;
+    <a href="datenschutz.html">Datenschutz</a> &bull;
+    <a href="mailto:info@callconnectai.de">info@callconnectai.de</a>
+  </p>
+</footer>
+
+</body>
+</html>
+
+<script>
+// === MOBILE MENU TOGGLE ===
+(function() {
+  const burger = document.getElementById('burgerBtn');
+  const menu = document.getElementById('mobileMenu');
+  if (!burger || !menu) return;
+
+  function closeMenu() {
+    burger.classList.remove('open');
+    menu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  burger.addEventListener('click', function() {
+    const isOpen = menu.classList.toggle('open');
+    burger.classList.toggle('open');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close when clicking a link
+  menu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close when clicking backdrop
+  menu.addEventListener('click', function(e) {
+    if (e.target === menu) closeMenu();
+  });
+})();
+</script>

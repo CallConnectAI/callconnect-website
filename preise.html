@@ -1,0 +1,528 @@
+<!DOCTYPE html><html lang="de" style="overflow-x:hidden;width:100%"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#f4f4f5"><title>Preise | CallConnect AI</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>
+:root {
+  --green: #00d632;
+  --green-dark: #00a828;
+  --green-light: #33e85e;
+  --green-bg: rgba(0,214,50,0.06);
+  --green-border: rgba(0,214,50,0.15);
+  --gray-bg: #f4f4f5;
+  --white: #ffffff;
+  --border: #e4e4e7;
+  --text: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  --red: #ef4444;
+  --red-bg: rgba(239,68,68,0.06);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; background: var(--gray-bg); min-height: 100%; }
+
+:root { background: var(--gray-bg); }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--gray-bg);
+  background-color: #f4f4f5;
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.parallax-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.parallax-shape {
+  position: absolute; border-radius: 50%; opacity: 0.04;
+  transition: transform 0.1s linear;
+}
+.shape-1 { width: 600px; height: 600px; background: var(--green); top: 10%; left: -10%; }
+.shape-2 { width: 400px; height: 400px; border: 3px solid var(--green); top: 50%; right: -5%; }
+.shape-3 { width: 200px; height: 200px; background: var(--green); top: 80%; left: 20%; }
+.shape-4 { width: 300px; height: 300px; border: 2px solid var(--green); top: 30%; right: 30%; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+.shape-5 { width: 150px; height: 150px; background: var(--green); top: 60%; left: 60%; border-radius: 30% 70% 50% 50% / 50% 50% 70% 30%; }
+
+/* === NAV === */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+  padding: 16px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--gray-bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: transform 0.35s ease;
+}
+.nav-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: var(--text); text-decoration: none; }
+.nav-logo span { color: var(--green); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { background: var(--green); color: #fff; padding: 8px 20px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: var(--green-dark); }
+.nav-burger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; z-index: 101;
+}
+.nav-burger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--text); border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(244,244,245,0.97);
+  backdrop-filter: blur(20px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.mobile-menu.open { opacity: 1; pointer-events: auto; }
+.mobile-menu-inner { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.mobile-menu-inner a { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: -0.5px; transition: color 0.2s; }
+.mobile-menu-inner a:hover { color: var(--green); }
+.mobile-menu-inner .mobile-cta { background: var(--green); color: #fff; padding: 12px 32px; border-radius: 100px; font-size: 18px; }
+.mobile-menu-inner .mobile-cta:hover { color: #fff; background: var(--green-dark); }
+
+/* === SECTION === */
+.section { position: relative; z-index: 1; padding: 100px 48px; max-width: 1300px; margin: 0 auto; }
+.section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--green); font-weight: 700; margin-bottom: 16px; }
+.section h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 20px; }
+.section h2 span { color: var(--green); }
+.section-intro { font-size: 17px; color: var(--text-secondary); max-width: 560px; line-height: 1.7; }
+
+/* === HERO (Preisseite) === */
+.hero {
+  position: relative; z-index: 1;
+  padding: 160px 48px 60px;
+  max-width: 1300px; margin: 0 auto;
+  text-align: center;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800; letter-spacing: -1px; line-height: 1.1;
+  margin-bottom: 16px;
+}
+.hero h1 span { color: var(--green); }
+.hero p { font-size: 17px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 8px; }
+
+.btn-primary {
+  background: var(--green); color: #fff;
+  padding: 14px 32px; border-radius: 100px;
+  font-weight: 600; font-size: 15px; text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-flex; align-items: center; gap: 8px;
+  cursor: pointer; border: none;
+}
+.btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+.btn-secondary {
+  background: var(--white); color: var(--text);
+  padding: 14px 32px; border-radius: 100px; border: 1px solid var(--border);
+  font-weight: 600; font-size: 15px; text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block; text-align: center; cursor: pointer;
+}
+.btn-secondary:hover { border-color: var(--text); }
+
+/* === HUMAN COMPARISON === */
+.human-section { padding-bottom: 0; }
+.human-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px; margin-top: 32px;
+}
+.human-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 20px; padding: 36px 32px; text-align: center;
+}
+.human-card .hc-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.human-card .hc-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+.human-card .hc-price { font-size: 36px; font-weight: 800; color: var(--red); text-decoration: line-through; text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+.human-card .hc-price sub { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+.human-card ul { list-style: none; text-align: left; margin-top: 16px; }
+.human-card ul li { padding: 6px 0; font-size: 13px; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+.human-card ul li:last-child { border-bottom: none; }
+.human-card ul li::before { content: '✗ '; color: var(--red); font-weight: 700; }
+
+/* === COMPARISON DIVIDER === */
+.comparison-vs {
+  text-align: center; margin: 32px 0; position: relative;
+}
+.comparison-vs::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 50%;
+  height: 1px; background: var(--border);
+}
+.comparison-vs span {
+  position: relative; background: var(--gray-bg); padding: 8px 32px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px; font-weight: 700; color: var(--green); letter-spacing: 2px;
+}
+
+/* === PRICING FOUR === */
+.pricing-four {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-top: 32px;
+}
+.price-card {
+  background: var(--white); border: 2px solid var(--border);
+  border-radius: 20px; padding: 32px 24px; text-align: center;
+  transition: all 0.25s; position: relative;
+  display: flex; flex-direction: column;
+}
+.price-card:hover { border-color: var(--green); }
+.price-card.popular { border-color: var(--green); background: var(--green-bg); }
+.price-card .popular-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--green); color: #fff; padding: 4px 16px;
+  border-radius: 100px; font-size: 11px; font-weight: 700; white-space: nowrap;
+}
+.price-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.price-card .price-save {
+  font-size: 12px; color: var(--green); font-weight: 600; margin-bottom: 8px;
+  background: var(--green-bg); border-radius: 100px; padding: 4px 12px;
+  display: inline-block;
+}
+.price-card .price { font-size: 36px; font-weight: 800; color: var(--green); margin-bottom: 2px; }
+.price-card .price sub { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+.price-card .desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
+.price-card .price-setup { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; font-weight: 500; }
+.price-card .features { list-style: none; text-align: left; margin-bottom: 24px; flex: 1; }
+.price-card .features li { padding: 7px 0; font-size: 13px; color: var(--text-secondary); border-bottom: 1px solid var(--border); line-height: 1.4; }
+.price-card .features li:last-child { border-bottom: none; }
+.price-card .features li::before { content: '✓ '; color: var(--green); font-weight: 700; }
+
+/* === SAVINGS GRID === */
+.savings-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-top: 32px;
+}
+.savings-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px 24px; text-align: center;
+}
+.savings-card .sc-icon { font-size: 28px; margin-bottom: 8px; }
+.savings-card .sc-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 800; color: var(--green); }
+.savings-card .sc-value sub { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+.savings-card .sc-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+
+/* === CONTACT FORM === */
+.contact-wrapper { max-width: 520px; margin: 48px auto 0; }
+.contact-form { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 40px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+.form-group input, .form-group textarea { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--gray-bg); color: var(--text); font-size: 15px; font-family: inherit; outline: none; transition: border-color 0.2s; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--green); }
+.form-group textarea { resize: vertical; }
+.form-consent { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0 20px; }
+.form-consent input[type="checkbox"] { margin-top: 3px; accent-color: var(--green); width: 16px; height: 16px; }
+.form-consent label { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+.form-consent a { color: var(--green); text-decoration: underline; }
+.form-submit-btn { width: 100%; border: none; cursor: pointer; font-family: inherit; font-size: 16px; justify-content: center; }
+.form-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.form-status { margin-top: 16px; text-align: center; font-size: 14px; display: none; }
+
+/* === FOOTER === */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 48px; max-width: 1300px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 20px;
+}
+footer .copy { font-size: 13px; color: var(--text-muted); }
+footer .links { display: flex; gap: 24px; }
+footer .links a { font-size: 13px; color: var(--text-muted); text-decoration: none; }
+footer .links a:hover { color: var(--text); }
+
+/* === REVEAL ANIMATIONS === */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* === RESPONSIVE === */
+@media (max-width: 1100px) {
+  .pricing-four { grid-template-columns: 1fr 1fr; }
+  .savings-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  nav { padding: 12px 24px; padding-top: max(12px, env(safe-area-inset-top)); background: var(--gray-bg); }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .hero { padding: 140px 24px 40px; }
+  .section { padding: 60px 24px; }
+  .human-grid { grid-template-columns: 1fr; }
+  .pricing-four { grid-template-columns: 1fr; }
+  .savings-grid { grid-template-columns: 1fr; }
+  footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style></head><body>
+
+<div class="parallax-bg">
+  <div class="parallax-shape shape-1"></div>
+  <div class="parallax-shape shape-2"></div>
+  <div class="parallax-shape shape-3"></div>
+  <div class="parallax-shape shape-4"></div>
+  <div class="parallax-shape shape-5"></div>
+</div>
+
+<nav>
+  <a href="/" class="nav-logo" style="text-decoration:none;color:inherit">CallConnect <span>AI</span></a>
+  <div class="nav-links">
+    <a href="/">Startseite</a>
+    <a href="preise.html" style="color:var(--text);font-weight:600">Preise</a>
+    <a href="mailto:sammy@callconnect-ai.de" class="nav-cta">Demo buchen</a>
+  </div>
+  <button class="nav-burger" aria-label="Menü öffnen" id="burgerBtn">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <a href="/">Startseite</a>
+    <a href="preise.html" style="color:var(--green);font-weight:600">Preise</a>
+    <a href="mailto:sammy@callconnect-ai.de" class="mobile-cta">Demo buchen</a>
+  </div>
+</div>
+
+<section class="hero" style="padding-bottom:40px">
+  <div class="hero-text" style="grid-column:1/-1;text-align:center">
+    <div class="section-label reveal" style="text-align:center;margin-bottom:16px">Preise</div>
+    <h1 style="font-size:clamp(40px,6vw,72px);margin-bottom:16px">Einfach. <span>Transparent.</span></h1>
+    <p style="max-width:600px;margin:0 auto 8px;text-align:center">
+      Monatlich kündbar. Keine versteckten Kosten. Einrichtung inklusive.
+    </p>
+  </div>
+</section>
+
+<!-- MENSCHENVERGLEICH -->
+<section class="section human-section">
+  <div class="reveal" style="text-align:center;max-width:700px;margin:0 auto">
+    <div class="section-label reveal" style="text-align:center">Der Vergleich</div>
+    <h2 class="reveal">Menschliche <span>Mitarbeiter</span> vs. CallConnect</h2>
+    <p class="reveal" style="color:var(--text-secondary);max-width:550px;margin:0 auto 32px">
+      Was eine echte Fachkraft kostet, bekommen Sie bei uns schon ab einem Bruchteil.
+      Und das rund um die Uhr, ohne Urlaub, ohne Krankheit.
+    </p>
+  </div>
+
+  <div class="human-grid reveal">
+    <div class="human-card">
+      <div class="hc-label">Minijob-Aushilfe</div>
+      <div class="hc-desc">für Stoßzeiten</div>
+      <div class="hc-price">708€<sub>/Monat</sub></div>
+      <div class="hc-vs" style="font-size:12px;font-weight:700;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);border-radius:100px;padding:4px 14px;display:inline-block;margin-bottom:16px;letter-spacing:0.5px;text-transform:uppercase">vs. 249 € bei CallConnect</div>
+      <ul>
+        <li>Maximal 40h/Monat</li>
+        <li>Kein Abenddienst</li>
+        <li>Kein Wochenende</li>
+        <li>Kein Urlaubsvertretung</li>
+        <li>Einmalige Einarbeitung nötig</li>
+      </ul>
+    </div>
+    <div class="human-card">
+      <div class="hc-label">Teilzeit-Empfangskraft</div>
+      <div class="hc-desc">20h/Woche</div>
+      <div class="hc-price">1.553€<sub>/Monat</sub></div>
+      <div class="hc-vs" style="font-size:12px;font-weight:700;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);border-radius:100px;padding:4px 14px;display:inline-block;margin-bottom:16px;letter-spacing:0.5px;text-transform:uppercase">vs. 399 € bei CallConnect</div>
+      <ul>
+        <li>Begrenzte Sprechzeiten</li>
+        <li>Kein Abenddienst</li>
+        <li>Kein Wochenende</li>
+        <li>Urlaub & Krankheit ungedeckt</li>
+        <li>Einarbeitung 2-4 Wochen</li>
+      </ul>
+    </div>
+    <div class="human-card">
+      <div class="hc-label">Vollzeit-Rezeptionistin</div>
+      <div class="hc-desc">160h/Monat</div>
+      <div class="hc-price">2.710€<sub>/Monat</sub></div>
+      <div class="hc-vs" style="font-size:12px;font-weight:700;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);border-radius:100px;padding:4px 14px;display:inline-block;margin-bottom:16px;letter-spacing:0.5px;text-transform:uppercase">vs. 549 € bei CallConnect</div>
+      <ul>
+        <li>~160h/Monat abgedeckt</li>
+        <li>Kein Wochenenddienst</li>
+        <li>Kein Nachtdienst</li>
+        <li>Urlaub & Krankheit ungedeckt</li>
+        <li>Fluktuation & Einarbeitung</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="comparison-vs reveal">
+  <span>DAS SPAREN SIE MIT CALLCONNECT</span>
+</div>
+
+<!-- VIER PREISPAKETE -->
+<section class="section" style="padding-top:0">
+  <div class="pricing-four reveal">
+    <div class="price-card">
+      <h3>Starter</h3>
+      <div class="price">249€<sub>/Monat</sub></div>
+      <div class="price-setup">+ Setup 0 € (einmalig)</div>
+      <div class="desc">Für Soloselbstständige & kleine Salons</div>
+      <ul class="features">
+        <li>Bis 200 Anrufe / Monat</li>
+        <li>Terminbuchung per Telefon</li>
+        <li>Individuelle KI-Persona</li>
+        <li>E-Mail-Benachrichtigung</li>
+        <li>Bis 2 Mitarbeiter</li>
+        <li>Einrichtung inklusive</li>
+      </ul>
+      <a href="#calendly-tbd" class="btn-secondary" style="display:block;text-align:center">Demo buchen</a>
+    </div>
+
+    <div class="price-card popular">
+      <div class="popular-badge">Empfohlen</div>
+      <h3>Salon</h3>
+      <div class="price-save">79 % günstiger als Teilzeitkraft</div>
+      <div class="price">399€<sub>/Monat</sub></div>
+      <div class="price-setup">+ Setup 0 € (einmalig)</div>
+      <div class="desc">Für den typischen Friseursalon</div>
+      <ul class="features">
+        <li>Bis 500 Anrufe / Monat</li>
+        <li>Alles aus Starter</li>
+        <li>SMS/WhatsApp-Bestätigung</li>
+        <li>Kalender-Integration</li>
+        <li>Intelligente Weiterleitung</li>
+        <li>Bis 5 Mitarbeiter</li>
+      </ul>
+      <a href="#calendly-tbd" class="btn-primary" style="display:block;text-align:center">Demo buchen</a>
+    </div>
+
+    <div class="price-card">
+      <h3>Pro</h3>
+      <div class="price-save">80 % günstiger als Vollzeitkraft</div>
+      <div class="price">549€<sub>/Monat</sub></div>
+      <div class="price-setup">+ Setup 0 € (einmalig)</div>
+      <div class="desc">Für große Salons & starke Auslastung</div>
+      <ul class="features">
+        <li>Bis 1.000 Anrufe / Monat</li>
+        <li>Alles aus Salon</li>
+        <li>Mehrsprachig (DE + 1)</li>
+        <li>Monatliches Reporting</li>
+        <li>Prioritätssupport</li>
+        <li>Bis 10 Mitarbeiter</li>
+      </ul>
+      <a href="#calendly-tbd" class="btn-secondary" style="display:block;text-align:center">Demo buchen</a>
+    </div>
+
+    <div class="price-card">
+      <h3>Business</h3>
+      <div class="price-save">73 % günstiger als 2 Teilzeitkräfte</div>
+      <div class="price">849€<sub>/Monat</sub></div>
+      <div class="price-setup">+ Setup 0 € (einmalig)</div>
+      <div class="desc">Für Filialisten & mehrere Standorte</div>
+      <ul class="features">
+        <li>Bis 1.800 Anrufe / Monat</li>
+        <li>Alles aus Pro</li>
+        <li>Bis 2 Standorte inklusive</li>
+        <li>Outbound-Terminerinnerung</li>
+        <li>Dedizierter Account Manager</li>
+        <li>API-Zugang optional</li>
+      </ul>
+      <a href="#calendly-tbd" class="btn-secondary" style="display:block;text-align:center">Demo buchen</a>
+    </div>
+  </div>
+
+  <p style="text-align:center;color:var(--text-muted);font-size:14px;margin-top:32px" class="reveal">Alle Preise monatlich kündbar. Keine Mindestlaufzeit. Einrichtung inklusive. Zusatzanrufe: 0,50 € pro Anruf.</p>
+</section>
+
+<!-- ERSCHWINGLICHKEIT -->
+<section class="section" style="border-top:1px solid var(--border)">
+  <div style="text-align:center;max-width:600px;margin:0 auto">
+    <h2 class="reveal" style="font-size:clamp(28px,4vw,40px);margin-bottom:16px">Das ist weniger als <span>eine Stunde</span> Mitarbeiterlohn pro Tag.</h2>
+    <p style="color:var(--text-secondary);margin-bottom:28px" class="reveal">
+      329 € pro Monat. Das sind etwa 11 € pro Tag. Weniger als eine Stunde Mindestlohn.
+      Dafuer bekommen Sie 24/7 Erreichbarkeit, Terminbuchungen und zufriedene Kunden.
+    </p>
+    <a href="#calendly-tbd" class="btn-primary reveal">Kostenlose Demo vereinbaren →</a>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="section" id="kontakt">
+  <div class="section-label reveal">Kontakt</div>
+  <h2 class="reveal">Jetzt <span>unverbindlich</span> anfragen.</h2>
+  <p class="section-intro reveal">Schreiben Sie uns - wir melden uns zeitnah zurueck.</p>
+  <div class="contact-wrapper reveal">
+    <form id="kontaktForm" class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Vorname</label>
+          <input type="text" id="k_vorname" required placeholder="Ihr Vorname">
+        </div>
+        <div class="form-group">
+          <label>Nachname</label>
+          <input type="text" id="k_nachname" required placeholder="Ihr Nachname">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>E-Mail</label>
+        <input type="email" id="k_email" required placeholder="ihre@email.de">
+      </div>
+      <div class="form-group">
+        <label>Telefon</label>
+        <input type="tel" id="k_telefon" placeholder="+49 123 456789">
+      </div>
+      <div class="form-group">
+        <label>Ihre Nachricht</label>
+        <textarea id="k_nachricht" rows="4" required placeholder="Wobei koennen wir Ihnen helfen?"></textarea>
+      </div>
+      <div class="form-consent">
+        <input type="checkbox" id="k_datenschutz" required>
+        <label for="k_datenschutz">Ich habe die <a href="datenschutz.html">Datenschutzerklaerung</a> zur Kenntnis genommen.</label>
+      </div>
+      <button type="submit" id="k_submit" class="btn-primary form-submit-btn">Nachricht senden</button>
+      <div id="k_status" class="form-status"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="copy">&copy; 2026 CallConnect AI</div>
+  <div class="links">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="mailto:info@callconnectai.de">info@callconnectai.de</a>
+  </div>
+</footer>
+
+<script>
+// === MOBILE MENU ===
+(function() {
+  const burger = document.getElementById('burgerBtn');
+  const menu = document.getElementById('mobileMenu');
+  if (!burger || !menu) return;
+  function closeMenu() { burger.classList.remove('open'); menu.classList.remove('open'); document.body.style.overflow = ''; }
+  burger.addEventListener('click', function() { const isOpen = menu.classList.toggle('open'); burger.classList.toggle('open'); document.body.style.overflow = isOpen ? 'hidden' : ''; });
+  menu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMenu); });
+  menu.addEventListener('click', function(e) { if (e.target === menu) closeMenu(); });
+})();
+
+// === REVEAL ON SCROLL ===
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+</body></html>
